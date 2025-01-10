@@ -1,4 +1,3 @@
 #!/usr/bin/env bash
-# Script to show the attached IPs of the current machine
-# Install net tools for ifconfig command. "sudo apt-get install net-tools"
-ifconfig | grep -oP '(?<=inet\s)\d+(\.\d+){3}'
+# displays all active IPv4 IPs on the machine it’s executed on
+ifconfig | grep "inet " | awk '{print $2}'
