@@ -1,7 +1,17 @@
 #!/usr/bin/env bash
-# Write a Bash script that pings an IP address passed as an argument.
-if [ "$#" -eq 0 ]; then
-    echo "Usage: 5-is_the_host_on_the_network {IP_ADDRESS}"
+
+# Check if a host is on the network by pinging it
+host=$1
+
+if [[ -z "$host" ]]; then
+    echo "Please provide a host."
+    exit 1
+fi
+
+ping -c 1 "$host" &> /dev/null
+
+if [[ $? -eq 0 ]]; then
+    echo "$host is up."
 else
-    ping -c 5 "$1"
+    echo "$host is down."
 fi
