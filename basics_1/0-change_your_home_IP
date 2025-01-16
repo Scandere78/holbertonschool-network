@@ -1,14 +1,21 @@
 #!/usr/bin/env bash
-# Script to configure /etc/hosts with custom DNS entries
-# Backup the original /etc/hosts file
+# this script will change your home IP address to localhost and fcebook
+
+# backup the hosts file
 cp /etc/hosts /etc/hosts.bak
 
-# Add or update the localhost entry
-sed -i '/127.0.0.1\s\+localhost/s/^/#/' /etc/hosts # Comment out existing localhost entry
-echo "127.0.0.2 localhost" | tee -a /etc/hosts
 
-# Add or update the facebook.com entry
-sed -i '/facebook.com/s/^/#/' /etc/hosts # Comment out any existing facebook.com entry
-echo "8.8.8.8 facebook.com" | tee -a /etc/hosts
+# change the IP address in the hosts file and facebook
+sed -i '/127.0.0.1\s\+localhost/s/^/#/' /etc/hosts
+echo "127.0.0.2 localhost" | sudo tee -a /etc/hosts
 
-echo "Configuration complete. /etc/hosts has been updated."
+sed -i '/faceboock.com/s/^/#/' /etc/hosts
+echo "8.8.8.8 facebook.com" | sudo tee -a /etc/hosts
+
+
+ping -c 1 localhost
+ping -c 1 facebook.com
+
+
+echo "configuration complete. /etc/hosts file has been updated"
+
